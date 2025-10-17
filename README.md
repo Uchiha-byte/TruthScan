@@ -32,7 +32,7 @@ A comprehensive AI-powered platform for detecting and analyzing synthetic conten
 
 1. **Clone or download the project**
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/Uchiha-byte/TruthScan.git>
    cd TruthScan
    ```
 
@@ -232,10 +232,6 @@ python backend.py
 ## 📝 License
 
 This project is a prototype demonstration of Defending Digital Truth Through Intelligent Content Verification capabilities. All code and designs are for educational and demonstration purposes.
-
-## 🤝 Contributing
-
-This is a prototype project. For questions or suggestions, please refer to the codebase documentation in `CODEBASE_INDEX.md`.
 
 ---
 
