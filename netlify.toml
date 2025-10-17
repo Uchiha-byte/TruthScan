@@ -1,4 +1,4 @@
 [[redirects]]
 from = "/*"
-to = "/start.py"
+to = "/backend.py"
 status = 200
