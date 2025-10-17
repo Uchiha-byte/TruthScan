@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}Reports - TruthScan{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold font-orbitron text-cyan-300 mb-4">ANALYTICS & REPORTS</h1>
+        <p class="text-gray-400">Comprehensive analysis and performance metrics</p>
+    </div>
+
+    <!-- Daily Report Summary -->
+    <div class="holo-card neon-border rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">DAILY REPORT SUMMARY</h2>
+        <div class="grid md:grid-cols-4 gap-6">
+            <div class="text-center">
+                <div class="text-4xl font-bold font-orbitron text-cyan-400 mb-2" id="dailyScans">--</div>
+                <div class="text-sm text-gray-400">Total Scans</div>
+                <div class="text-xs text-gray-500" id="dailyDate">--</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-bold font-orbitron text-red-400 mb-2" id="dailyThreats">--</div>
+                <div class="text-sm text-gray-400">Threats Detected</div>
+                <div class="text-xs text-gray-500">Today</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-bold font-orbitron text-yellow-400 mb-2" id="dailyFalsePositives">--</div>
+                <div class="text-sm text-gray-400">False Positives</div>
+                <div class="text-xs text-gray-500">Minimal</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-bold font-orbitron text-green-400 mb-2" id="dailyAccuracy">--</div>
+                <div class="text-sm text-gray-400">Accuracy Rate</div>
+                <div class="text-xs text-gray-500">Excellent</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weekly Trends -->
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="holo-card neon-border rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">WEEKLY TRENDS</h2>
+            <div id="weeklyTrends" class="space-y-4">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="holo-card neon-border rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">TOP THREAT TYPES</h2>
+            <div id="topThreatTypes" class="space-y-4">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Metrics -->
+    <div class="holo-card neon-border rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">PERFORMANCE METRICS</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="text-center">
+                <div class="text-3xl font-bold font-orbitron text-cyan-400 mb-2" id="avgProcessingTime">--</div>
+                <div class="text-sm text-gray-400">Avg Processing Time</div>
+                <div class="text-xs text-gray-500">Per scan</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold font-orbitron text-green-400 mb-2" id="systemUptime">--</div>
+                <div class="text-sm text-gray-400">System Uptime</div>
+                <div class="text-xs text-gray-500">Last 30 days</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold font-orbitron text-purple-400 mb-2" id="apiCallsToday">--</div>
+                <div class="text-sm text-gray-400">API Calls Today</div>
+                <div class="text-xs text-gray-500">Total requests</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold font-orbitron text-blue-400 mb-2" id="dataProcessed">--</div>
+                <div class="text-sm text-gray-400">Data Processed</div>
+                <div class="text-xs text-gray-500">Today</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Analytics -->
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="holo-card neon-border rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">DETECTION ACCURACY BY TYPE</h2>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Text Analysis</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-cyan-500 w-11/12"></div>
+                        </div>
+                        <span class="text-cyan-400 font-semibold">94.2%</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Image Forensics</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-purple-500 w-10/12"></div>
+                        </div>
+                        <span class="text-purple-400 font-semibold">91.8%</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Audio Verification</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-pink-500 w-9/12"></div>
+                        </div>
+                        <span class="text-pink-400 font-semibold">89.3%</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Video Analysis</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-yellow-500 w-11/12"></div>
+                        </div>
+                        <span class="text-yellow-400 font-semibold">92.7%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="holo-card neon-border rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">SYSTEM HEALTH</h2>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">CPU Usage</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-green-500 w-3/4"></div>
+                        </div>
+                        <span class="text-green-400 font-semibold">68%</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Memory Usage</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-blue-500 w-5/6"></div>
+                        </div>
+                        <span class="text-blue-400 font-semibold">82%</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Storage Usage</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-purple-500 w-2/3"></div>
+                        </div>
+                        <span class="text-purple-400 font-semibold">45%</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Network Latency</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-cyan-500 w-1/4"></div>
+                        </div>
+                        <span class="text-cyan-400 font-semibold">12ms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Options -->
+    <div class="holo-card neon-border rounded-2xl p-8">
+        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">REPORT EXPORTS</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+            <button class="holo-card p-6 rounded-xl border-2 border-cyan-500/50 hover:bg-cyan-500/10 transition text-center">
+                <div class="text-4xl mb-2">📊</div>
+                <div class="font-orbitron font-semibold text-cyan-300">PDF Report</div>
+                <div class="text-xs text-gray-400 mt-1">Download comprehensive analysis</div>
+            </button>
+            <button class="holo-card p-6 rounded-xl border-2 border-purple-500/50 hover:bg-purple-500/10 transition text-center">
+                <div class="text-4xl mb-2">📈</div>
+                <div class="font-orbitron font-semibold text-purple-300">CSV Data</div>
+                <div class="text-xs text-gray-400 mt-1">Export raw metrics data</div>
+            </button>
+            <button class="holo-card p-6 rounded-xl border-2 border-pink-500/50 hover:bg-pink-500/10 transition text-center">
+                <div class="text-4xl mb-2">🔗</div>
+                <div class="font-orbitron font-semibold text-pink-300">API Access</div>
+                <div class="text-xs text-gray-400 mt-1">Generate API endpoints</div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Load reports data
+    async function loadReportsData() {
+        try {
+            const response = await fetch('/api/reports');
+            const data = await response.json();
+            
+            // Update daily report
+            document.getElementById('dailyScans').textContent = data.daily_report.total_scans.toLocaleString();
+            document.getElementById('dailyThreats').textContent = data.daily_report.threats_detected.toLocaleString();
+            document.getElementById('dailyFalsePositives').textContent = data.daily_report.false_positives;
+            document.getElementById('dailyAccuracy').textContent = (data.daily_report.accuracy_rate * 100).toFixed(1) + '%';
+            document.getElementById('dailyDate').textContent = data.daily_report.date;
+            
+            // Update weekly trends
+            const trendsContainer = document.getElementById('weeklyTrends');
+            trendsContainer.innerHTML = data.weekly_trends.map(day => `
+                <div class="flex justify-between items-center p-3 bg-black/30 rounded-lg">
+                    <div>
+                        <div class="font-semibold text-cyan-300">${day.day}</div>
+                        <div class="text-sm text-gray-400">${day.scans} scans</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-semibold text-red-400">${day.threats} threats</div>
+                        <div class="text-xs text-gray-400">detected</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Update top threat types
+            const threatTypesContainer = document.getElementById('topThreatTypes');
+            threatTypesContainer.innerHTML = Object.entries(data.top_threat_types).map(([type, count]) => `
+                <div class="flex justify-between items-center p-3 bg-black/30 rounded-lg">
+                    <div class="font-semibold text-cyan-300">${type}</div>
+                    <div class="text-sm font-semibold text-white">${count}</div>
+                </div>
+            `).join('');
+            
+            // Update performance metrics
+            document.getElementById('avgProcessingTime').textContent = data.performance_metrics.average_processing_time;
+            document.getElementById('systemUptime').textContent = data.performance_metrics.system_uptime;
+            document.getElementById('apiCallsToday').textContent = data.performance_metrics.api_calls_today.toLocaleString();
+            document.getElementById('dataProcessed').textContent = data.performance_metrics.data_processed;
+            
+        } catch (error) {
+            console.error('Error loading reports data:', error);
+        }
+    }
+    
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', loadReportsData);
+    
+    // Refresh data every 60 seconds
+    setInterval(loadReportsData, 60000);
+</script>
+{% endblock %}
