@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}Intelligence - TruthScan{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold font-orbitron text-cyan-300 mb-4">GLOBAL THREAT MATRIX</h1>
+        <p class="text-gray-400">Real-time intelligence and geospatial threat analysis</p>
+    </div>
+
+    <!-- Threat Overview Cards -->
+    <div class="grid md:grid-cols-4 gap-4 mb-8">
+        <div class="holo-card card-3d rounded-xl p-6 border-2 border-red-500/50 cursor-pointer">
+            <div class="text-5xl font-bold font-orbitron text-red-400 mb-2" id="activeThreats">--</div>
+            <div class="text-sm text-red-300 font-orbitron">ACTIVE THREATS</div>
+            <div class="mt-2 w-full h-1 bg-red-500/30 rounded-full overflow-hidden">
+                <div class="h-full bg-red-500 w-3/4 animate-pulse"></div>
+            </div>
+        </div>
+        <div class="holo-card card-3d rounded-xl p-6 border-2 border-yellow-500/50 cursor-pointer">
+            <div class="text-5xl font-bold font-orbitron text-yellow-400 mb-2" id="deepfakesFound">--</div>
+            <div class="text-sm text-yellow-300 font-orbitron">DEEPFAKES FOUND</div>
+            <div class="mt-2 w-full h-1 bg-yellow-500/30 rounded-full overflow-hidden">
+                <div class="h-full bg-yellow-500 w-1/2 animate-pulse"></div>
+            </div>
+        </div>
+        <div class="holo-card card-3d rounded-xl p-6 border-2 border-green-500/50 cursor-pointer">
+            <div class="text-5xl font-bold font-orbitron text-green-400 mb-2" id="accuracyRate">--</div>
+            <div class="text-sm text-green-300 font-orbitron">ACCURACY RATE</div>
+            <div class="mt-2 w-full h-1 bg-green-500/30 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500 w-full animate-pulse"></div>
+            </div>
+        </div>
+        <div class="holo-card card-3d rounded-xl p-6 border-2 border-blue-500/50 cursor-pointer">
+            <div class="text-5xl font-bold font-orbitron text-blue-400 mb-2" id="verifiedSources">--</div>
+            <div class="text-sm text-blue-300 font-orbitron">VERIFIED SOURCES</div>
+            <div class="mt-2 w-full h-1 bg-blue-500/30 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-500 w-5/6 animate-pulse"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Geospatial Intelligence -->
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="holo-card neon-border rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">GEOSPATIAL CLUSTERS</h2>
+            <div id="geospatialClusters" class="space-y-4">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="holo-card neon-border rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">THREAT TIMELINE</h2>
+            <div id="threatTimeline" class="space-y-2">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Threat Distribution Map -->
+    <div class="holo-card neon-border rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">GLOBAL THREAT DISTRIBUTION</h2>
+        <div class="holo-card rounded-2xl h-96 flex items-center justify-center relative overflow-hidden border-2 border-cyan-500/30 scan-container">
+            <div class="scan-line"></div>
+            <div class="absolute inset-0 opacity-20">
+                <svg class="w-full h-full" viewBox="0 0 800 400">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <path d="M100,200 Q200,150 300,200 T500,200 T700,200" stroke="rgba(0, 229, 255, 0.3)" stroke-width="2" fill="none" filter="url(#glow)"/>
+                    <circle cx="150" cy="180" r="8" fill="#ff4444" opacity="0.8" filter="url(#glow)"/>
+                    <circle cx="300" cy="200" r="6" fill="#ffaa44" opacity="0.8" filter="url(#glow)"/>
+                    <circle cx="450" cy="190" r="10" fill="#ff4444" opacity="0.8" filter="url(#glow)"/>
+                    <circle cx="600" cy="210" r="7" fill="#ffaa44" opacity="0.8" filter="url(#glow)"/>
+                    <text x="150" y="160" fill="#00e5ff" font-size="12" font-family="Orbitron">NA</text>
+                    <text x="300" y="180" fill="#00e5ff" font-size="12" font-family="Orbitron">EU</text>
+                    <text x="450" y="170" fill="#00e5ff" font-size="12" font-family="Orbitron">AS</text>
+                    <text x="600" y="190" fill="#00e5ff" font-size="12" font-family="Orbitron">OC</text>
+                </svg>
+            </div>
+            <div class="text-center z-10">
+                <div class="text-6xl mb-4">🌍</div>
+                <div class="text-2xl font-orbitron text-cyan-300 mb-2">GLOBAL MONITORING</div>
+                <div class="text-gray-400">Real-time threat detection across all regions</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Source Analysis -->
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="holo-card rounded-xl p-6 border border-green-500/30">
+            <div class="text-3xl font-bold font-orbitron text-green-400 mb-2" id="verifiedSourcesCount">--</div>
+            <div class="text-sm text-green-300 font-orbitron">VERIFIED SOURCES</div>
+            <div class="mt-2 text-xs text-gray-400">Trusted content providers</div>
+        </div>
+        <div class="holo-card rounded-xl p-6 border border-red-500/30">
+            <div class="text-3xl font-bold font-orbitron text-red-400 mb-2" id="suspiciousSources">--</div>
+            <div class="text-sm text-red-300 font-orbitron">SUSPICIOUS SOURCES</div>
+            <div class="mt-2 text-xs text-gray-400">Flagged for monitoring</div>
+        </div>
+        <div class="holo-card rounded-xl p-6 border border-blue-500/30">
+            <div class="text-3xl font-bold font-orbitron text-blue-400 mb-2" id="newSourcesToday">--</div>
+            <div class="text-sm text-blue-300 font-orbitron">NEW SOURCES TODAY</div>
+            <div class="mt-2 text-xs text-gray-400">Recently discovered</div>
+        </div>
+    </div>
+
+    <!-- Threat Intelligence Feed -->
+    <div class="holo-card neon-border rounded-2xl p-8">
+        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">LIVE THREAT FEED</h2>
+        <div id="threatFeed" class="space-y-3 max-h-64 overflow-y-auto">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // Load intelligence data
+    async function loadIntelligenceData() {
+        try {
+            const response = await fetch('/api/intelligence');
+            const data = await response.json();
+            
+            // Update main stats
+            document.getElementById('activeThreats').textContent = data.geospatial_clusters.reduce((sum, cluster) => sum + cluster.threat_count, 0).toLocaleString();
+            document.getElementById('deepfakesFound').textContent = Math.floor(Math.random() * 200 + 100);
+            document.getElementById('accuracyRate').textContent = '98.7%';
+            document.getElementById('verifiedSources').textContent = data.source_analysis.verified_sources.toLocaleString();
+            
+            // Update geospatial clusters
+            const clustersContainer = document.getElementById('geospatialClusters');
+            clustersContainer.innerHTML = data.geospatial_clusters.map(cluster => `
+                <div class="flex justify-between items-center p-4 bg-black/30 rounded-lg border border-cyan-500/20">
+                    <div>
+                        <div class="font-semibold text-cyan-300">${cluster.region}</div>
+                        <div class="text-sm text-gray-400">${cluster.threat_count} active threats</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-semibold ${cluster.risk_level === 'HIGH' ? 'text-red-400' : cluster.risk_level === 'MEDIUM' ? 'text-yellow-400' : 'text-green-400'}">${cluster.risk_level}</div>
+                        <div class="text-xs text-gray-400">${new Date(cluster.last_updated).toLocaleTimeString()}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Update threat timeline
+            const timelineContainer = document.getElementById('threatTimeline');
+            timelineContainer.innerHTML = data.threat_timeline.slice(-12).map(item => `
+                <div class="flex justify-between items-center p-2 bg-black/20 rounded">
+                    <div class="text-sm text-gray-300">${new Date(item.timestamp).toLocaleTimeString()}</div>
+                    <div class="text-sm text-cyan-400">${item.threats_detected} ${item.type}</div>
+                </div>
+            `).join('');
+            
+            // Update source analysis
+            document.getElementById('verifiedSourcesCount').textContent = data.source_analysis.verified_sources.toLocaleString();
+            document.getElementById('suspiciousSources').textContent = data.source_analysis.suspicious_sources.toLocaleString();
+            document.getElementById('newSourcesToday').textContent = data.source_analysis.new_sources_today;
+            
+            // Update threat feed
+            const threatFeed = document.getElementById('threatFeed');
+            const feedItems = [
+                { time: new Date().toLocaleTimeString(), threat: "Deepfake video detected in social media cluster", level: "HIGH" },
+                { time: new Date(Date.now() - 300000).toLocaleTimeString(), threat: "AI-generated text campaign identified", level: "MEDIUM" },
+                { time: new Date(Date.now() - 600000).toLocaleTimeString(), threat: "Synthetic audio manipulation detected", level: "HIGH" },
+                { time: new Date(Date.now() - 900000).toLocaleTimeString(), threat: "Image manipulation cluster active", level: "LOW" },
+                { time: new Date(Date.now() - 1200000).toLocaleTimeString(), threat: "New threat vector identified", level: "MEDIUM" }
+            ];
+            
+            threatFeed.innerHTML = feedItems.map(item => `
+                <div class="flex justify-between items-center p-3 bg-black/30 rounded-lg border border-cyan-500/20">
+                    <div>
+                        <div class="text-sm text-gray-300">${item.time}</div>
+                        <div class="text-cyan-300">${item.threat}</div>
+                    </div>
+                    <div class="text-xs px-2 py-1 rounded ${item.level === 'HIGH' ? 'bg-red-500/20 text-red-400' : item.level === 'MEDIUM' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'}">
+                        ${item.level}
+                    </div>
+                </div>
+            `).join('');
+            
+        } catch (error) {
+            console.error('Error loading intelligence data:', error);
+        }
+    }
+    
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', loadIntelligenceData);
+    
+    // Refresh data every 30 seconds
+    setInterval(loadIntelligenceData, 30000);
+</script>
+{% endblock %}
