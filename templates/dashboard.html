@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - TruthScan{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold font-orbitron text-cyan-300 mb-4">COMMAND DASHBOARD</h1>
+        <p class="text-gray-400">Real-time system status and threat monitoring</p>
+    </div>
+
+    <!-- System Status Cards -->
+    <div class="grid md:grid-cols-4 gap-6 mb-8">
+        <div class="holo-card card-3d rounded-xl p-6 border-2 border-green-500/50">
+            <div class="text-3xl font-bold font-orbitron text-green-400 mb-2" id="totalScans">--</div>
+            <div class="text-sm text-green-300 font-orbitron">TOTAL SCANS</div>
+            <div class="mt-2 w-full h-1 bg-green-500/30 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500 w-3/4 animate-pulse"></div>
+            </div>
+        </div>
+        
+        <div class="holo-card card-3d rounded-xl p-6 border-2 border-red-500/50">
+            <div class="text-3xl font-bold font-orbitron text-red-400 mb-2" id="threatsDetected">--</div>
+            <div class="text-sm text-red-300 font-orbitron">THREATS DETECTED</div>
+            <div class="mt-2 w-full h-1 bg-red-500/30 rounded-full overflow-hidden">
+                <div class="h-full bg-red-500 w-2/3 animate-pulse"></div>
+            </div>
+        </div>
+        
+        <div class="holo-card card-3d rounded-xl p-6 border-2 border-blue-500/50">
+            <div class="text-3xl font-bold font-orbitron text-blue-400 mb-2" id="accuracyRate">--</div>
+            <div class="text-sm text-blue-300 font-orbitron">ACCURACY RATE</div>
+            <div class="mt-2 w-full h-1 bg-blue-500/30 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-500 w-full animate-pulse"></div>
+            </div>
+        </div>
+        
+        <div class="holo-card card-3d rounded-xl p-6 border-2 border-purple-500/50">
+            <div class="text-3xl font-bold font-orbitron text-purple-400 mb-2" id="activeModels">--</div>
+            <div class="text-sm text-purple-300 font-orbitron">ACTIVE MODELS</div>
+            <div class="mt-2 w-full h-1 bg-purple-500/30 rounded-full overflow-hidden">
+                <div class="h-full bg-purple-500 w-5/6 animate-pulse"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="holo-card neon-border rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">RECENT DETECTIONS</h2>
+            <div id="recentDetections" class="space-y-4">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="holo-card neon-border rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">SYSTEM STATUS</h2>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Neural Engine</span>
+                    <span class="text-green-400 font-semibold">OPERATIONAL</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Content Sync</span>
+                    <span class="text-green-400 font-semibold">SYNCHRONIZED</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Threat Database</span>
+                    <span class="text-green-400 font-semibold">UPDATED</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">API Gateway</span>
+                    <span class="text-green-400 font-semibold">ACTIVE</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">Last Scan</span>
+                    <span class="text-cyan-400 font-mono" id="lastScan">--</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Threat Distribution -->
+    <div class="holo-card neon-border rounded-2xl p-8">
+        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">THREAT DISTRIBUTION</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="text-center">
+                <div class="text-4xl mb-2">🎭</div>
+                <div class="text-2xl font-bold text-red-400" id="deepfakeCount">--</div>
+                <div class="text-sm text-gray-400">Deepfake Videos</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl mb-2">📝</div>
+                <div class="text-2xl font-bold text-yellow-400" id="textCount">--</div>
+                <div class="text-sm text-gray-400">AI-Generated Text</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl mb-2">🎵</div>
+                <div class="text-2xl font-bold text-purple-400" id="audioCount">--</div>
+                <div class="text-sm text-gray-400">Synthetic Audio</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl mb-2">🖼️</div>
+                <div class="text-2xl font-bold text-pink-400" id="imageCount">--</div>
+                <div class="text-sm text-gray-400">Manipulated Images</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Load dashboard data
+    async function loadDashboardData() {
+        try {
+            const response = await fetch('/api/dashboard');
+            const data = await response.json();
+            
+            // Update main stats
+            document.getElementById('totalScans').textContent = data.total_scans.toLocaleString();
+            document.getElementById('threatsDetected').textContent = data.threats_detected.toLocaleString();
+            document.getElementById('accuracyRate').textContent = data.accuracy_rate + '%';
+            document.getElementById('activeModels').textContent = data.active_models;
+            document.getElementById('lastScan').textContent = new Date(data.last_scan).toLocaleTimeString();
+            
+            // Update recent detections
+            const recentContainer = document.getElementById('recentDetections');
+            recentContainer.innerHTML = data.recent_detections.map(detection => `
+                <div class="flex justify-between items-center p-3 bg-black/30 rounded-lg border border-cyan-500/20">
+                    <div>
+                        <div class="font-semibold text-cyan-300">${detection.id}</div>
+                        <div class="text-sm text-gray-400">${detection.type}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-semibold text-white">${(detection.confidence * 100).toFixed(1)}%</div>
+                        <div class="text-xs text-gray-400">${new Date(detection.timestamp).toLocaleTimeString()}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Update threat distribution
+            document.getElementById('deepfakeCount').textContent = data.recent_detections.filter(d => d.type === 'Deepfake Video').length;
+            document.getElementById('textCount').textContent = data.recent_detections.filter(d => d.type === 'AI Text').length;
+            document.getElementById('audioCount').textContent = data.recent_detections.filter(d => d.type === 'Synthetic Audio').length;
+            document.getElementById('imageCount').textContent = data.recent_detections.filter(d => d.type === 'Manipulated Image').length;
+            
+        } catch (error) {
+            console.error('Error loading dashboard data:', error);
+        }
+    }
+    
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', loadDashboardData);
+    
+    // Refresh data every 30 seconds
+    setInterval(loadDashboardData, 30000);
+</script>
+{% endblock %}
