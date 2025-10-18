@@ -1,8 +1,393 @@
-{% extends "base.html" %}
-
-{% block title %}TruthScan - Defending Digital Truth Through Intelligent Content Verification{% endblock %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthScan - Defending Digital Truth Through Intelligent Content Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        body {
+            background: #0a0e27;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(125deg, #0a0e27 0%, #1a1f3a 25%, #0f1b3d 50%, #1e1535 75%, #0a0e27 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Particle Effect */
+        .particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(0, 229, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+        
+        /* Cyber Grid */
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Neon Glow Effects */
+        .neon-border {
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            box-shadow: 
+                0 0 10px rgba(0, 229, 255, 0.5),
+                inset 0 0 10px rgba(0, 229, 255, 0.2);
+            position: relative;
+        }
+        
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00e5ff, #7b2ff7, #f72585, #00e5ff);
+            background-size: 300% 300%;
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+            animation: neonRotate 3s linear infinite;
+        }
+        
+        .neon-border:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes neonRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Holographic Card */
+        .holo-card {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(30, 21, 53, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0, 229, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: holoShine 3s infinite;
+        }
+        
+        @keyframes holoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            animation: glitch-1 2s infinite;
+            color: #00e5ff;
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 2s infinite;
+            color: #f72585;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0% { clip-path: inset(40% 0 61% 0); transform: translate(0); }
+            20% { clip-path: inset(92% 0 1% 0); transform: translate(-2px, 2px); }
+            40% { clip-path: inset(43% 0 1% 0); transform: translate(-2px, -2px); }
+            60% { clip-path: inset(25% 0 58% 0); transform: translate(2px, 2px); }
+            80% { clip-path: inset(54% 0 7% 0); transform: translate(2px, -2px); }
+            100% { clip-path: inset(58% 0 43% 0); transform: translate(0); }
+        }
+        
+        @keyframes glitch-2 {
+            0% { clip-path: inset(50% 0 30% 0); transform: translate(0); }
+            20% { clip-path: inset(10% 0 80% 0); transform: translate(2px, -2px); }
+            40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, 2px); }
+            60% { clip-path: inset(30% 0 50% 0); transform: translate(-2px, -2px); }
+            80% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
+            100% { clip-path: inset(40% 0 40% 0); transform: translate(0); }
+        }
+        
+        /* Scan Line Effect */
+        .scan-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+            animation: scan 3s ease-in-out infinite;
+            box-shadow: 0 0 10px #00e5ff;
+        }
+        
+        @keyframes scan {
+            0% { top: -2px; }
+            100% { top: 100%; }
+        }
+        
+        /* Pulse Animation */
+        .pulse-ring {
+            animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% { transform: scale(0.8); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(0.8); opacity: 1; }
+        }
+        
+        /* 3D Transform Cards */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 
+                0 20px 50px rgba(0, 229, 255, 0.3),
+                0 0 30px rgba(123, 47, 247, 0.2);
+        }
+        
+        /* Cyber Button */
+        .cyber-btn {
+            position: relative;
+            background: linear-gradient(135deg, #7b2ff7 0%, #f72585 100%);
+            border: none;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.3s;
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: #0a0e27;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.3s;
+        }
+        
+        .cyber-btn:hover {
+            box-shadow: 0 0 30px rgba(123, 47, 247, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .cyber-btn:hover::before {
+            background: linear-gradient(135deg, rgba(123, 47, 247, 0.3) 0%, rgba(247, 37, 133, 0.3) 100%);
+        }
+        
+        .cyber-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Data Stream Effect */
+        .data-stream {
+            position: fixed;
+            font-family: 'Courier New', monospace;
+            color: rgba(0, 229, 255, 0.3);
+            font-size: 12px;
+            line-height: 14px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+            animation: dataFlow 15s linear infinite;
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Progress Bar Futuristic */
+        .progress-futuristic {
+            position: relative;
+            background: rgba(0, 229, 255, 0.1);
+            overflow: hidden;
+        }
+        
+        .progress-futuristic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+        
+        @keyframes progressShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Hexagon Pattern */
+        .hex-pattern {
+            background-image: radial-gradient(circle, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Alert Indicator */
+        .alert-pulse {
+            animation: alertPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes alertPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 20px currentColor; }
+            50% { opacity: 0.7; box-shadow: 0 0 40px currentColor; }
+        }
+        
+        /* Typing Effect */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        
+        .typing {
+            overflow: hidden;
+            border-right: 2px solid #00e5ff;
+            white-space: nowrap;
+            animation: typing 3s steps(40) 1s infinite, blink 0.5s step-end infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="cyber-grid"></div>
+    
+    <!-- Particles -->
+    <div id="particles"></div>
+    
+    <!-- Data Streams -->
+    <div class="data-stream" style="top: 10%;">01101000 01110101 01101101 01100001 01101110</div>
+    <div class="data-stream" style="top: 30%; animation-delay: 2s;">ANALYZING...DEEPFAKE_DETECTED</div>
+    <div class="data-stream" style="top: 50%; animation-delay: 4s;">CONTENT_VERIFICATION_0x7a8f3c2d</div>
+    <div class="data-stream" style="top: 70%; animation-delay: 6s;">AI_CONFIDENCE_SCORE: 98.7%</div>
+    
+    <div class="relative z-10">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 top-0 holo-card border-b border-cyan-500/30">
+            <div class="max-w-7xl mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg blur-sm opacity-75 pulse-ring"></div>
+                            <div class="relative w-full h-full bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center font-bold text-xl font-orbitron">
+                                TS
+                            </div>
+                        </div>
+                        <a href="/" class="text-2xl font-bold font-orbitron bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+                            TruthScan
+                        </a>
+                    </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="/dashboard" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Dashboard
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="/detection" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Detection
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="/intelligence" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Intelligence
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="/reports" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Reports
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
         <!-- Hero Section -->
         <div class="pt-32 pb-16 px-4">
@@ -188,100 +573,4 @@
                                     </feMerge>
                                 </filter>
                             </defs>
-                            <path d="M100,200 Q200,150 300,200 T500,200 T700,200" stroke="rgba(0, 229, 255, 0.3)" stroke-width="2" fill="none" filter="url(#glow)"/>
-                            <circle cx="150" cy="180" r="8" fill="#ff4444" opacity="0.8" filter="url(#glow)"/>
-                            <circle cx="300" cy="200" r="6" fill="#ffaa44" opacity="0.8" filter="url(#glow)"/>
-                            <circle cx="450" cy="190" r="10" fill="#ff4444" opacity="0.8" filter="url(#glow)"/>
-                            <circle cx="600" cy="210" r="7" fill="#ffaa44" opacity="0.8" filter="url(#glow)"/>
-                            <text x="150" y="160" fill="#00e5ff" font-size="12" font-family="Orbitron">NA</text>
-                            <text x="300" y="180" fill="#00e5ff" font-size="12" font-family="Orbitron">EU</text>
-                            <text x="450" y="170" fill="#00e5ff" font-size="12" font-family="Orbitron">AS</text>
-                            <text x="600" y="190" fill="#00e5ff" font-size="12" font-family="Orbitron">OC</text>
-                        </svg>
-                    </div>
-                    <div class="text-center z-10">
-                        <div class="text-6xl mb-4">🌍</div>
-                        <div class="text-2xl font-orbitron text-cyan-300 mb-2">GLOBAL MONITORING</div>
-                        <div class="text-gray-400">Real-time threat detection across all regions</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let selectedContentType = null;
-
-        function selectContentType(type) {
-            selectedContentType = type;
-            document.getElementById('analysisPanel').classList.remove('hidden');
-            document.getElementById('results').classList.add('hidden');
-            
-            // Update placeholder text based on content type
-            const placeholder = {
-                'text': '// PASTE TEXT CONTENT FOR LINGUISTIC ANALYSIS...',
-                'image': '// UPLOAD IMAGE FILE FOR PIXEL-LEVEL FORENSICS...',
-                'audio': '// UPLOAD AUDIO FILE FOR SPECTRAL ANALYSIS...'
-            };
-            
-            document.getElementById('contentInput').placeholder = placeholder[type] || '// PASTE CONTENT FOR ANALYSIS...';
-        }
-
-        async function analyzeContent() {
-            const content = document.getElementById('contentInput').value;
-            if (!content.trim()) {
-                alert('Please enter content to analyze');
-                return;
-            }
-
-            if (!selectedContentType) {
-                alert('Please select a content type first');
-                return;
-            }
-
-            try {
-                const response = await fetch('/api/analyze', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        type: selectedContentType,
-                        content: content
-                    })
-                });
-
-                const data = await response.json();
-                displayResults(data);
-            } catch (error) {
-                console.error('Error analyzing content:', error);
-                alert('Error analyzing content. Please try again.');
-            }
-        }
-
-        function displayResults(data) {
-            // Show results panel
-            document.getElementById('results').classList.remove('hidden');
-            
-            // Update authenticity score
-            document.getElementById('scoreValue').textContent = data.authenticity_score + '%';
-            document.getElementById('scoreBar').style.width = data.authenticity_score + '%';
-            
-            // Update detection grid
-            document.getElementById('aiDetection').textContent = data.model_used;
-            document.getElementById('manipLevel').textContent = data.threat_level;
-            document.getElementById('sourceVerif').textContent = data.confidence + '% confidence';
-            document.getElementById('blockHash').textContent = data.verification_hash;
-            
-            // Update forensic analysis
-            const forensicList = document.getElementById('forensicList');
-            forensicList.innerHTML = data.analysis.map(item => `<li>• ${item}</li>`).join('');
-            
-            // Add recommendations
-            if (data.recommendations) {
-                forensicList.innerHTML += '<li class="text-yellow-400 font-semibold mt-4">RECOMMENDATIONS:</li>';
-                forensicList.innerHTML += data.recommendations.map(rec => `<li class="text-yellow-300">• ${rec}</li>`).join('');
-            }
-        }
-    </script>
-{% endblock %}
+                            <path d="M100,200 Q200,150 300,200 T500,200
