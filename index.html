@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthScan - Defending Digital Truth Through Intelligent Content Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        body {
+            background: #0a0e27;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(125deg, #0a0e27 0%, #1a1f3a 25%, #0f1b3d 50%, #1e1535 75%, #0a0e27 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Particle Effect */
+        .particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(0, 229, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+        
+        /* Cyber Grid */
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Neon Glow Effects */
+        .neon-border {
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            box-shadow: 
+                0 0 10px rgba(0, 229, 255, 0.5),
+                inset 0 0 10px rgba(0, 229, 255, 0.2);
+            position: relative;
+        }
+        
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00e5ff, #7b2ff7, #f72585, #00e5ff);
+            background-size: 300% 300%;
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+            animation: neonRotate 3s linear infinite;
+        }
+        
+        .neon-border:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes neonRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Holographic Card */
+        .holo-card {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(30, 21, 53, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0, 229, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: holoShine 3s infinite;
+        }
+        
+        @keyframes holoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            animation: glitch-1 2s infinite;
+            color: #00e5ff;
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 2s infinite;
+            color: #f72585;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0% { clip-path: inset(40% 0 61% 0); transform: translate(0); }
+            20% { clip-path: inset(92% 0 1% 0); transform: translate(-2px, 2px); }
+            40% { clip-path: inset(43% 0 1% 0); transform: translate(-2px, -2px); }
+            60% { clip-path: inset(25% 0 58% 0); transform: translate(2px, 2px); }
+            80% { clip-path: inset(54% 0 7% 0); transform: translate(2px, -2px); }
+            100% { clip-path: inset(58% 0 43% 0); transform: translate(0); }
+        }
+        
+        @keyframes glitch-2 {
+            0% { clip-path: inset(50% 0 30% 0); transform: translate(0); }
+            20% { clip-path: inset(10% 0 80% 0); transform: translate(2px, -2px); }
+            40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, 2px); }
+            60% { clip-path: inset(30% 0 50% 0); transform: translate(-2px, -2px); }
+            80% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
+            100% { clip-path: inset(40% 0 40% 0); transform: translate(0); }
+        }
+        
+        /* Scan Line Effect */
+        .scan-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+            animation: scan 3s ease-in-out infinite;
+            box-shadow: 0 0 10px #00e5ff;
+        }
+        
+        @keyframes scan {
+            0% { top: -2px; }
+            100% { top: 100%; }
+        }
+        
+        /* Pulse Animation */
+        .pulse-ring {
+            animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% { transform: scale(0.8); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(0.8); opacity: 1; }
+        }
+        
+        /* 3D Transform Cards */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 
+                0 20px 50px rgba(0, 229, 255, 0.3),
+                0 0 30px rgba(123, 47, 247, 0.2);
+        }
+        
+        /* Cyber Button */
+        .cyber-btn {
+            position: relative;
+            background: linear-gradient(135deg, #7b2ff7 0%, #f72585 100%);
+            border: none;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.3s;
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: #0a0e27;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.3s;
+        }
+        
+        .cyber-btn:hover {
+            box-shadow: 0 0 30px rgba(123, 47, 247, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .cyber-btn:hover::before {
+            background: linear-gradient(135deg, rgba(123, 47, 247, 0.3) 0%, rgba(247, 37, 133, 0.3) 100%);
+        }
+        
+        .cyber-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Data Stream Effect */
+        .data-stream {
+            position: fixed;
+            font-family: 'Courier New', monospace;
+            color: rgba(0, 229, 255, 0.3);
+            font-size: 12px;
+            line-height: 14px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+            animation: dataFlow 15s linear infinite;
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Progress Bar Futuristic */
+        .progress-futuristic {
+            position: relative;
+            background: rgba(0, 229, 255, 0.1);
+            overflow: hidden;
+        }
+        
+        .progress-futuristic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+        
+        @keyframes progressShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Hexagon Pattern */
+        .hex-pattern {
+            background-image: radial-gradient(circle, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Alert Indicator */
+        .alert-pulse {
+            animation: alertPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes alertPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 20px currentColor; }
+            50% { opacity: 0.7; box-shadow: 0 0 40px currentColor; }
+        }
+        
+        /* Typing Effect */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        
+        .typing {
+            overflow: hidden;
+            border-right: 2px solid #00e5ff;
+            white-space: nowrap;
+            animation: typing 3s steps(40) 1s infinite, blink 0.5s step-end infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="cyber-grid"></div>
+    
+    <!-- Particles -->
+    <div id="particles"></div>
+    
+    <!-- Data Streams -->
+    <div class="data-stream" style="top: 10%;">01101000 01110101 01101101 01100001 01101110</div>
+    <div class="data-stream" style="top: 30%; animation-delay: 2s;">ANALYZING...DEEPFAKE_DETECTED</div>
+    <div class="data-stream" style="top: 50%; animation-delay: 4s;">CONTENT_VERIFICATION_0x7a8f3c2d</div>
+    <div class="data-stream" style="top: 70%; animation-delay: 6s;">AI_CONFIDENCE_SCORE: 98.7%</div>
+    
+    <div class="relative z-10">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 top-0 holo-card border-b border-cyan-500/30">
+            <div class="max-w-7xl mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg blur-sm opacity-75 pulse-ring"></div>
+                            <div class="relative w-full h-full bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center font-bold text-xl font-orbitron">
+                                TS
+                            </div>
+                        </div>
+                        <a href="index.html" class="text-2xl font-bold font-orbitron bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+                            TruthScan
+                        </a>
+                    </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="dashboard.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Dashboard
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="detection.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Detection
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="intelligence.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Intelligence
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="reports.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Reports
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="pt-20">
+            <!-- Hero Section -->
+            <div class="min-h-screen flex items-center justify-center relative">
+                <div class="text-center max-w-6xl mx-auto px-4">
+                    <h1 class="text-6xl md:text-8xl font-bold font-orbitron mb-8 glitch" data-text="TRUTHSCAN">
+                        <span class="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                            TRUTHSCAN
+                        </span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-4 font-orbitron">
+                        DEFENDING DIGITAL TRUTH THROUGH
+                    </p>
+                    <p class="text-2xl md:text-4xl font-bold text-cyan-400 mb-12 font-orbitron typing">
+                        INTELLIGENT CONTENT VERIFICATION
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8 mb-16">
+                        <div class="holo-card card-3d rounded-xl p-6 text-center">
+                            <div class="text-4xl font-bold font-orbitron text-cyan-400 mb-2">2,847</div>
+                            <div class="text-sm text-cyan-300 font-orbitron">ACTIVE THREATS</div>
+                        </div>
+                        <div class="holo-card card-3d rounded-xl p-6 text-center">
+                            <div class="text-4xl font-bold font-orbitron text-purple-400 mb-2">98.7%</div>
+                            <div class="text-sm text-purple-300 font-orbitron">ACCURACY RATE</div>
+                        </div>
+                        <div class="holo-card card-3d rounded-xl p-6 text-center">
+                            <div class="text-4xl font-bold font-orbitron text-pink-400 mb-2">45,000</div>
+                            <div class="text-sm text-pink-300 font-orbitron">VERIFIED SOURCES</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="max-w-7xl mx-auto px-4 pb-12">
+                
+                <!-- Content Type Selection -->
+                <div class="grid md:grid-cols-3 gap-6 mb-12">
+                    <div class="holo-card card-3d neon-border rounded-2xl p-8 cursor-pointer scan-container" onclick="selectContentType('text')">
+                        <div class="scan-line"></div>
+                        <div class="text-6xl mb-4 text-center">📝</div>
+                        <h3 class="text-2xl font-bold mb-3 font-orbitron text-cyan-300 text-center">TEXT ANALYSIS</h3>
+                        <p class="text-gray-400 text-center text-sm">Neural linguistic pattern detection • GPT fingerprinting • Semantic verification</p>
+                        <div class="mt-6 text-center">
+                            <span class="inline-block px-4 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs font-semibold border border-cyan-500/50">
+                                READY
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="holo-card card-3d neon-border rounded-2xl p-8 cursor-pointer scan-container" onclick="selectContentType('image')">
+                        <div class="scan-line"></div>
+                        <div class="text-6xl mb-4 text-center">🖼️</div>
+                        <h3 class="text-2xl font-bold mb-3 font-orbitron text-purple-400 text-center">IMAGE FORENSICS</h3>
+                        <p class="text-gray-400 text-center text-sm">Deepfake detection • Pixel-level analysis • GAN artifact identification</p>
+                        <div class="mt-6 text-center">
+                            <span class="inline-block px-4 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-semibold border border-purple-500/50">
+                                READY
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="holo-card card-3d neon-border rounded-2xl p-8 cursor-pointer scan-container" onclick="selectContentType('audio')">
+                        <div class="scan-line"></div>
+                        <div class="text-6xl mb-4 text-center">🎵</div>
+                        <h3 class="text-2xl font-bold mb-3 font-orbitron text-pink-400 text-center">AUDIO VERIFICATION</h3>
+                        <p class="text-gray-400 text-center text-sm">Voice cloning detection • Spectral analysis • Waveform authentication</p>
+                        <div class="mt-6 text-center">
+                            <span class="inline-block px-4 py-1 bg-pink-500/20 text-pink-300 rounded-full text-xs font-semibold border border-pink-500/50">
+                                READY
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis Panel -->
+                <div id="analysisPanel" class="holo-card neon-border rounded-2xl p-8 mb-12 hidden">
+                    <h2 class="text-3xl font-bold mb-8 font-orbitron text-cyan-300">QUANTUM ANALYSIS CHAMBER</h2>
+                    
+                    <div class="mb-8">
+                        <textarea id="contentInput" class="w-full h-40 bg-black/50 rounded-xl p-6 text-cyan-300 border-2 border-cyan-500/30 focus:border-cyan-500 focus:outline-none font-mono placeholder-gray-600 backdrop-blur-sm" placeholder="// PASTE CONTENT OR UPLOAD FILE FOR NEURAL ANALYSIS..."></textarea>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <button onclick="analyzeContent()" class="cyber-btn px-10 py-4">
+                            <span class="font-orbitron font-semibold text-cyan-300">◈ INITIATE SCAN</span>
+                        </button>
+                        <button class="holo-card px-10 py-4 rounded-lg border-2 border-purple-500/50 font-orbitron font-semibold text-purple-300 hover:bg-purple-500/10 transition">
+                            ↑ UPLOAD FILE
+                        </button>
+                        <button class="holo-card px-10 py-4 rounded-lg border-2 border-pink-500/50 font-orbitron font-semibold text-pink-300 hover:bg-pink-500/10 transition">
+                            ⚡ BATCH PROCESS
+                        </button>
+                    </div>
+
+                    <!-- Results -->
+                    <div id="results" class="hidden">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="holo-card rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4 font-orbitron text-cyan-300">ANALYSIS RESULTS</h3>
+                                <div id="analysisResults" class="space-y-3">
+                                    <!-- Dynamic content will be loaded here -->
+                                </div>
+                            </div>
+                            
+                            <div class="holo-card rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4 font-orbitron text-purple-300">THREAT ASSESSMENT</h3>
+                                <div id="threatAssessment" class="space-y-3">
+                                    <!-- Dynamic content will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Global Threat Intelligence -->
+                <div class="holo-card neon-border rounded-2xl p-8">
+                    <h2 class="text-3xl font-bold mb-8 font-orbitron text-cyan-300 text-center">GLOBAL THREAT INTELLIGENCE</h2>
+                    
+                    <div class="grid md:grid-cols-4 gap-6 mb-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-red-400 mb-2">2,847</div>
+                            <div class="text-sm text-gray-400">Active Threats</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-yellow-400 mb-2">156</div>
+                            <div class="text-sm text-gray-400">Deepfakes Found</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-green-400 mb-2">98.7%</div>
+                            <div class="text-sm text-gray-400">Accuracy Rate</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-blue-400 mb-2">45,000</div>
+                            <div class="text-sm text-gray-400">Verified Sources</div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="detection.html" class="cyber-btn px-12 py-4 inline-block">
+                            <span class="font-orbitron font-semibold text-cyan-300">◈ START ANALYSIS</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for analysis
+        const mockAnalysisData = {
+            text: {
+                confidence: 87.3,
+                analysis: [
+                    "Linguistic patterns indicate 87% probability of AI generation",
+                    "Perplexity score: 23.4 (threshold: 15.0)",
+                    "Burstiness analysis shows uniform sentence structure",
+                    "Semantic coherence index: 0.73 (human average: 0.85)",
+                    "GPT-3.5 fingerprint detected with 92% confidence"
+                ],
+                threatLevel: "HIGH",
+                recommendations: [
+                    "Content shows strong indicators of synthetic generation",
+                    "Recommend immediate verification from trusted sources",
+                    "Consider flagging for manual review"
+                ]
+            },
+            image: {
+                confidence: 78.9,
+                analysis: [
+                    "GAN artifacts detected in 3 distinct regions",
+                    "Noise pattern analysis reveals synthetic generation markers",
+                    "Color space inconsistencies suggest AI manipulation",
+                    "Compression artifacts inconsistent with natural photography",
+                    "Face region shows 78% probability of deepfake generation"
+                ],
+                threatLevel: "MEDIUM",
+                recommendations: [
+                    "Content shows mixed signals - requires further analysis",
+                    "Cross-reference with known fact-checking databases",
+                    "Consider additional verification methods"
+                ]
+            },
+            audio: {
+                confidence: 84.2,
+                analysis: [
+                    "Spectral analysis indicates voice cloning with 84% confidence",
+                    "Temporal inconsistencies detected in 12% of audio segments",
+                    "Acoustic fingerprint matches known TTS model patterns",
+                    "Voice characteristics show artificial modulation",
+                    "Background noise patterns suggest synthetic generation"
+                ],
+                threatLevel: "HIGH",
+                recommendations: [
+                    "Content shows strong indicators of synthetic generation",
+                    "Recommend immediate verification from trusted sources",
+                    "Alert security team for potential disinformation campaign"
+                ]
+            }
+        };
+
+        let selectedContentType = null;
+
+        function selectContentType(type) {
+            selectedContentType = type;
+            document.getElementById('analysisPanel').classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+            
+            // Update placeholder text based on content type
+            const placeholder = {
+                'text': '// PASTE TEXT CONTENT FOR LINGUISTIC ANALYSIS...',
+                'image': '// UPLOAD IMAGE FILE FOR PIXEL-LEVEL FORENSICS...',
+                'audio': '// UPLOAD AUDIO FILE FOR SPECTRAL ANALYSIS...'
+            };
+            
+            document.getElementById('contentInput').placeholder = placeholder[type] || '// PASTE CONTENT FOR ANALYSIS...';
+        }
+
+        function analyzeContent() {
+            const content = document.getElementById('contentInput').value;
+            if (!content.trim()) {
+                alert('Please enter content to analyze');
+                return;
+            }
+
+            if (!selectedContentType) {
+                alert('Please select a content type first');
+                return;
+            }
+
+            // Show loading state
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.remove('hidden');
+            
+            // Simulate analysis delay
+            setTimeout(() => {
+                displayResults(mockAnalysisData[selectedContentType]);
+            }, 2000);
+        }
+
+        function displayResults(data) {
+            const analysisDiv = document.getElementById('analysisResults');
+            const threatDiv = document.getElementById('threatAssessment');
+            
+            // Display analysis results
+            analysisDiv.innerHTML = data.analysis.map(item => 
+                `<div class="text-sm text-gray-300 mb-2">• ${item}</div>`
+            ).join('');
+            
+            // Display threat assessment
+            const threatColor = data.threatLevel === 'HIGH' ? 'text-red-400' : 
+                               data.threatLevel === 'MEDIUM' ? 'text-yellow-400' : 'text-green-400';
+            
+            threatDiv.innerHTML = `
+                <div class="text-lg font-bold font-orbitron ${threatColor} mb-4">
+                    THREAT LEVEL: ${data.threatLevel}
+                </div>
+                <div class="text-2xl font-bold font-orbitron text-cyan-400 mb-4">
+                    CONFIDENCE: ${data.confidence}%
+                </div>
+                <div class="space-y-2">
+                    <div class="text-sm font-semibold text-gray-300 mb-2">RECOMMENDATIONS:</div>
+                    ${data.recommendations.map(rec => 
+                        `<div class="text-sm text-gray-400">• ${rec}</div>`
+                    ).join('')}
+                </div>
+            `;
+        }
+
+        // Particle generation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize particles when page loads
+        document.addEventListener('DOMContentLoaded', createParticles);
+    </script>
+</body>
+</html>

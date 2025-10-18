@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - TruthScan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        body {
+            background: #0a0e27;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(125deg, #0a0e27 0%, #1a1f3a 25%, #0f1b3d 50%, #1e1535 75%, #0a0e27 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Cyber Grid */
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Holographic Card */
+        .holo-card {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(30, 21, 53, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0, 229, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: holoShine 3s infinite;
+        }
+        
+        @keyframes holoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Neon Glow Effects */
+        .neon-border {
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            box-shadow: 
+                0 0 10px rgba(0, 229, 255, 0.5),
+                inset 0 0 10px rgba(0, 229, 255, 0.2);
+            position: relative;
+        }
+        
+        /* 3D Transform Cards */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 
+                0 20px 50px rgba(0, 229, 255, 0.3),
+                0 0 30px rgba(123, 47, 247, 0.2);
+        }
+        
+        /* Pulse Animation */
+        .pulse-ring {
+            animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% { transform: scale(0.8); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(0.8); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="cyber-grid"></div>
+    
+    <div class="relative z-10">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 top-0 holo-card border-b border-cyan-500/30">
+            <div class="max-w-7xl mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg blur-sm opacity-75 pulse-ring"></div>
+                            <div class="relative w-full h-full bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center font-bold text-xl font-orbitron">
+                                TS
+                            </div>
+                        </div>
+                        <a href="index.html" class="text-2xl font-bold font-orbitron bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+                            TruthScan
+                        </a>
+                    </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="dashboard.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Dashboard
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="detection.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Detection
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="intelligence.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Intelligence
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="reports.html" class="text-cyan-400 font-medium relative group">
+                            Reports
+                            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="pt-20">
+            <div class="max-w-7xl mx-auto px-4 py-8">
+                <!-- Header -->
+                <div class="mb-8">
+                    <h1 class="text-4xl font-bold font-orbitron text-cyan-300 mb-4">ANALYTICS & REPORTS</h1>
+                    <p class="text-gray-400">Comprehensive analysis and performance metrics</p>
+                </div>
+
+                <!-- Daily Report Summary -->
+                <div class="holo-card neon-border rounded-2xl p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">DAILY REPORT SUMMARY</h2>
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-cyan-400 mb-2" id="dailyScans">1,847</div>
+                            <div class="text-sm text-gray-400">Total Scans</div>
+                            <div class="text-xs text-gray-500" id="dailyDate">2024-01-15</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-red-400 mb-2" id="dailyThreats">127</div>
+                            <div class="text-sm text-gray-400">Threats Detected</div>
+                            <div class="text-xs text-gray-500">Today</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-yellow-400 mb-2" id="dailyFalsePositives">8</div>
+                            <div class="text-sm text-gray-400">False Positives</div>
+                            <div class="text-xs text-gray-500">Minimal</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-green-400 mb-2" id="dailyAccuracy">98.7%</div>
+                            <div class="text-sm text-gray-400">Accuracy Rate</div>
+                            <div class="text-xs text-gray-500">Excellent</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weekly Trends -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="holo-card neon-border rounded-2xl p-8">
+                        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">WEEKLY TRENDS</h2>
+                        <div id="weeklyTrends" class="space-y-4">
+                            <!-- Dynamic content will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="holo-card neon-border rounded-2xl p-8">
+                        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">TOP THREAT TYPES</h2>
+                        <div id="topThreatTypes" class="space-y-4">
+                            <!-- Dynamic content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="holo-card neon-border rounded-2xl p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300 text-center">PERFORMANCE METRICS</h2>
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold font-orbitron text-cyan-400 mb-2">1.2s</div>
+                            <div class="text-sm text-gray-400">Avg Processing Time</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold font-orbitron text-green-400 mb-2">99.9%</div>
+                            <div class="text-sm text-gray-400">System Uptime</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold font-orbitron text-purple-400 mb-2">7,234</div>
+                            <div class="text-sm text-gray-400">API Calls Today</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold font-orbitron text-pink-400 mb-2">342GB</div>
+                            <div class="text-sm text-gray-400">Data Processed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="holo-card neon-border rounded-2xl p-8">
+                    <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300 text-center">EXPORT OPTIONS</h2>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="holo-card px-8 py-4 rounded-lg border-2 border-cyan-500/50 font-orbitron font-semibold text-cyan-300 hover:bg-cyan-500/10 transition">
+                            📊 EXPORT PDF
+                        </button>
+                        <button class="holo-card px-8 py-4 rounded-lg border-2 border-purple-500/50 font-orbitron font-semibold text-purple-300 hover:bg-purple-500/10 transition">
+                            📈 EXPORT CSV
+                        </button>
+                        <button class="holo-card px-8 py-4 rounded-lg border-2 border-pink-500/50 font-orbitron font-semibold text-pink-300 hover:bg-pink-500/10 transition">
+                            🔗 API ACCESS
+                        </button>
+                        <button class="holo-card px-8 py-4 rounded-lg border-2 border-yellow-500/50 font-orbitron font-semibold text-yellow-300 hover:bg-yellow-500/10 transition">
+                            📋 GENERATE REPORT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for reports
+        const weeklyTrends = [
+            { day: "Monday", scans: 1156, threats: 89 },
+            { day: "Tuesday", scans: 1243, threats: 95 },
+            { day: "Wednesday", scans: 1187, threats: 78 },
+            { day: "Thursday", scans: 1321, threats: 102 },
+            { day: "Friday", scans: 1456, threats: 118 },
+            { day: "Saturday", scans: 987, threats: 67 },
+            { day: "Sunday", scans: 892, threats: 54 }
+        ];
+
+        const topThreatTypes = [
+            { type: "Deepfake Videos", count: 45, percentage: 35.4 },
+            { type: "AI-Generated Text", count: 38, percentage: 29.9 },
+            { type: "Synthetic Audio", count: 28, percentage: 22.0 },
+            { type: "Manipulated Images", count: 25, percentage: 19.7 },
+            { type: "Other", count: 20, percentage: 15.7 }
+        ];
+
+        function loadWeeklyTrends() {
+            const container = document.getElementById('weeklyTrends');
+            container.innerHTML = weeklyTrends.map(day => `
+                <div class="flex justify-between items-center p-4 bg-black/30 rounded-lg">
+                    <div>
+                        <div class="font-orbitron text-cyan-300">${day.day}</div>
+                        <div class="text-sm text-gray-400">${day.scans} scans</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-orbitron text-red-400">${day.threats}</div>
+                        <div class="text-xs text-gray-500">threats</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadTopThreatTypes() {
+            const container = document.getElementById('topThreatTypes');
+            container.innerHTML = topThreatTypes.map(threat => `
+                <div class="p-4 bg-black/30 rounded-lg">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="font-orbitron text-cyan-300">${threat.type}</div>
+                        <div class="text-sm text-gray-400">${threat.count} cases</div>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-cyan-400 to-purple-500 h-2 rounded-full" style="width: ${threat.percentage}%"></div>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1">${threat.percentage}% of total threats</div>
+                </div>
+            `).join('');
+        }
+
+        function updateDailyDate() {
+            const today = new Date();
+            const dateString = today.toISOString().split('T')[0];
+            document.getElementById('dailyDate').textContent = dateString;
+        }
+
+        // Initialize reports data
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWeeklyTrends();
+            loadTopThreatTypes();
+            updateDailyDate();
+            
+            // Simulate real-time updates
+            setInterval(() => {
+                // Update daily stats with random variations
+                const dailyScans = document.getElementById('dailyScans');
+                const dailyThreats = document.getElementById('dailyThreats');
+                
+                const currentScans = parseInt(dailyScans.textContent.replace(',', ''));
+                const currentThreats = parseInt(dailyThreats.textContent);
+                
+                dailyScans.textContent = (currentScans + Math.floor(Math.random() * 10)).toLocaleString();
+                dailyThreats.textContent = currentThreats + Math.floor(Math.random() * 3);
+            }, 30000); // Update every 30 seconds
+        });
+    </script>
+</body>
+</html>

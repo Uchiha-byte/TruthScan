@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligence - TruthScan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        body {
+            background: #0a0e27;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(125deg, #0a0e27 0%, #1a1f3a 25%, #0f1b3d 50%, #1e1535 75%, #0a0e27 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Cyber Grid */
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Holographic Card */
+        .holo-card {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(30, 21, 53, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0, 229, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: holoShine 3s infinite;
+        }
+        
+        @keyframes holoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Neon Glow Effects */
+        .neon-border {
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            box-shadow: 
+                0 0 10px rgba(0, 229, 255, 0.5),
+                inset 0 0 10px rgba(0, 229, 255, 0.2);
+            position: relative;
+        }
+        
+        /* 3D Transform Cards */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 
+                0 20px 50px rgba(0, 229, 255, 0.3),
+                0 0 30px rgba(123, 47, 247, 0.2);
+        }
+        
+        /* Pulse Animation */
+        .pulse-ring {
+            animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% { transform: scale(0.8); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(0.8); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="cyber-grid"></div>
+    
+    <div class="relative z-10">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 top-0 holo-card border-b border-cyan-500/30">
+            <div class="max-w-7xl mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg blur-sm opacity-75 pulse-ring"></div>
+                            <div class="relative w-full h-full bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center font-bold text-xl font-orbitron">
+                                TS
+                            </div>
+                        </div>
+                        <a href="index.html" class="text-2xl font-bold font-orbitron bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+                            TruthScan
+                        </a>
+                    </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="dashboard.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Dashboard
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="detection.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Detection
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                        <a href="intelligence.html" class="text-cyan-400 font-medium relative group">
+                            Intelligence
+                            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400"></span>
+                        </a>
+                        <a href="reports.html" class="text-gray-300 hover:text-cyan-400 transition font-medium relative group">
+                            Reports
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="pt-20">
+            <div class="max-w-7xl mx-auto px-4 py-8">
+                <!-- Header -->
+                <div class="mb-8">
+                    <h1 class="text-4xl font-bold font-orbitron text-cyan-300 mb-4">GLOBAL THREAT MATRIX</h1>
+                    <p class="text-gray-400">Real-time intelligence and geospatial threat analysis</p>
+                </div>
+
+                <!-- Threat Overview Cards -->
+                <div class="grid md:grid-cols-4 gap-4 mb-8">
+                    <div class="holo-card card-3d rounded-xl p-6 border-2 border-red-500/50 cursor-pointer">
+                        <div class="text-5xl font-bold font-orbitron text-red-400 mb-2">2,847</div>
+                        <div class="text-sm text-red-300 font-orbitron">ACTIVE THREATS</div>
+                        <div class="mt-2 w-full h-1 bg-red-500/30 rounded-full overflow-hidden">
+                            <div class="h-full bg-red-500 w-3/4 animate-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="holo-card card-3d rounded-xl p-6 border-2 border-yellow-500/50 cursor-pointer">
+                        <div class="text-5xl font-bold font-orbitron text-yellow-400 mb-2">156</div>
+                        <div class="text-sm text-yellow-300 font-orbitron">DEEPFAKES FOUND</div>
+                        <div class="mt-2 w-full h-1 bg-yellow-500/30 rounded-full overflow-hidden">
+                            <div class="h-full bg-yellow-500 w-1/2 animate-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="holo-card card-3d rounded-xl p-6 border-2 border-green-500/50 cursor-pointer">
+                        <div class="text-5xl font-bold font-orbitron text-green-400 mb-2">98.7%</div>
+                        <div class="text-sm text-green-300 font-orbitron">ACCURACY RATE</div>
+                        <div class="mt-2 w-full h-1 bg-green-500/30 rounded-full overflow-hidden">
+                            <div class="h-full bg-green-500 w-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="holo-card card-3d rounded-xl p-6 border-2 border-blue-500/50 cursor-pointer">
+                        <div class="text-5xl font-bold font-orbitron text-blue-400 mb-2">45,000</div>
+                        <div class="text-sm text-blue-300 font-orbitron">VERIFIED SOURCES</div>
+                        <div class="mt-2 w-full h-1 bg-blue-500/30 rounded-full overflow-hidden">
+                            <div class="h-full bg-blue-500 w-5/6 animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geospatial Intelligence -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="holo-card neon-border rounded-2xl p-8">
+                        <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300">GEOSPATIAL CLUSTERS</h2>
+                        <div id="geospatialClusters" class="space-y-4">
+                            <!-- Dynamic content will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="holo-card neon-border rounded-2xl p-8">
+                        <h2 class="text-2xl font-bold mb-6 font-orbitron text-purple-300">THREAT TIMELINE</h2>
+                        <div id="threatTimeline" class="space-y-3">
+                            <!-- Dynamic content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Source Analysis -->
+                <div class="holo-card neon-border rounded-2xl p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300 text-center">SOURCE ANALYSIS</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-green-400 mb-2">45,000</div>
+                            <div class="text-sm text-gray-400">Verified Sources</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-yellow-400 mb-2">342</div>
+                            <div class="text-sm text-gray-400">Suspicious Sources</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold font-orbitron text-blue-400 mb-2">28</div>
+                            <div class="text-sm text-gray-400">New Sources Today</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Threat Feed -->
+                <div class="holo-card neon-border rounded-2xl p-8">
+                    <h2 class="text-2xl font-bold mb-6 font-orbitron text-cyan-300 text-center">REAL-TIME THREAT FEED</h2>
+                    <div id="threatFeed" class="space-y-3 max-h-96 overflow-y-auto">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for intelligence
+        const geospatialClusters = [
+            {
+                region: "North America",
+                threatCount: 1247,
+                riskLevel: "HIGH",
+                coordinates: [39.8283, -98.5795],
+                lastUpdated: "2 minutes ago"
+            },
+            {
+                region: "Europe",
+                threatCount: 892,
+                riskLevel: "MEDIUM",
+                coordinates: [54.5260, 15.2551],
+                lastUpdated: "5 minutes ago"
+            },
+            {
+                region: "Asia",
+                threatCount: 456,
+                riskLevel: "MEDIUM",
+                coordinates: [35.6762, 139.6503],
+                lastUpdated: "8 minutes ago"
+            },
+            {
+                region: "Other",
+                threatCount: 252,
+                riskLevel: "LOW",
+                coordinates: [-25.2744, 133.7751],
+                lastUpdated: "12 minutes ago"
+            }
+        ];
+
+        const threatTimeline = [
+            { time: "00:00", threats: 23, type: "Deepfake" },
+            { time: "02:00", threats: 18, type: "AI Text" },
+            { time: "04:00", threats: 31, type: "Synthetic Audio" },
+            { time: "06:00", threats: 27, type: "Manipulated Image" },
+            { time: "08:00", threats: 35, type: "Deepfake" },
+            { time: "10:00", threats: 42, type: "AI Text" },
+            { time: "12:00", threats: 38, type: "Synthetic Audio" },
+            { time: "14:00", threats: 29, type: "Manipulated Image" },
+            { time: "16:00", threats: 33, type: "Deepfake" },
+            { time: "18:00", threats: 41, type: "AI Text" },
+            { time: "20:00", threats: 36, type: "Synthetic Audio" },
+            { time: "22:00", threats: 25, type: "Manipulated Image" }
+        ];
+
+        const threatFeed = [
+            {
+                id: "TH-001",
+                type: "Deepfake Video",
+                severity: "HIGH",
+                location: "North America",
+                timestamp: "2 minutes ago",
+                description: "Political figure manipulation detected"
+            },
+            {
+                id: "TH-002",
+                type: "AI-Generated Text",
+                severity: "MEDIUM",
+                location: "Europe",
+                timestamp: "5 minutes ago",
+                description: "News article with synthetic content"
+            },
+            {
+                id: "TH-003",
+                type: "Synthetic Audio",
+                severity: "HIGH",
+                location: "Asia",
+                timestamp: "8 minutes ago",
+                description: "Voice cloning attempt identified"
+            },
+            {
+                id: "TH-004",
+                type: "Manipulated Image",
+                severity: "LOW",
+                location: "Other",
+                timestamp: "12 minutes ago",
+                description: "Social media image manipulation"
+            },
+            {
+                id: "TH-005",
+                type: "Deepfake Video",
+                severity: "HIGH",
+                location: "North America",
+                timestamp: "15 minutes ago",
+                description: "Celebrity face swap detected"
+            }
+        ];
+
+        function loadGeospatialClusters() {
+            const container = document.getElementById('geospatialClusters');
+            container.innerHTML = geospatialClusters.map(cluster => `
+                <div class="flex justify-between items-center p-4 bg-black/30 rounded-lg border border-cyan-500/20">
+                    <div>
+                        <div class="font-orbitron text-cyan-300">${cluster.region}</div>
+                        <div class="text-sm text-gray-400">${cluster.threatCount} threats</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-orbitron text-${
+                            cluster.riskLevel === 'HIGH' ? 'red' : 
+                            cluster.riskLevel === 'MEDIUM' ? 'yellow' : 'green'
+                        }-400">
+                            ${cluster.riskLevel}
+                        </div>
+                        <div class="text-xs text-gray-500">${cluster.lastUpdated}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadThreatTimeline() {
+            const container = document.getElementById('threatTimeline');
+            container.innerHTML = threatTimeline.map(item => `
+                <div class="flex justify-between items-center p-3 bg-black/20 rounded-lg">
+                    <div>
+                        <div class="font-orbitron text-cyan-300">${item.time}</div>
+                        <div class="text-sm text-gray-400">${item.type}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-orbitron text-purple-400">${item.threats}</div>
+                        <div class="text-xs text-gray-500">threats</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadThreatFeed() {
+            const container = document.getElementById('threatFeed');
+            container.innerHTML = threatFeed.map(threat => `
+                <div class="flex justify-between items-center p-4 bg-black/30 rounded-lg border border-cyan-500/20">
+                    <div>
+                        <div class="font-orbitron text-cyan-300">${threat.id}</div>
+                        <div class="text-sm text-gray-400">${threat.type} - ${threat.location}</div>
+                        <div class="text-xs text-gray-500">${threat.description}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-orbitron text-${
+                            threat.severity === 'HIGH' ? 'red' : 
+                            threat.severity === 'MEDIUM' ? 'yellow' : 'green'
+                        }-400">
+                            ${threat.severity}
+                        </div>
+                        <div class="text-xs text-gray-500">${threat.timestamp}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize intelligence data
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGeospatialClusters();
+            loadThreatTimeline();
+            loadThreatFeed();
+            
+            // Simulate real-time updates
+            setInterval(() => {
+                // Update timestamps
+                loadGeospatialClusters();
+                loadThreatTimeline();
+                loadThreatFeed();
+            }, 30000); // Update every 30 seconds
+        });
+    </script>
+</body>
+</html>
